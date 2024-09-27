@@ -1,4 +1,4 @@
-from os import listdir, makedirs, getcwd
+from os import listdir, makedirs, getcwd, path, name
 from random import randint, choice, sample
 
 
@@ -46,8 +46,8 @@ def decorate_letter():
     return skills_with_beauty_letter
 
 
-def dir_for_char() -> str:
-    folder_name = "chars"
+def dir_for_cards() -> str:
+    folder_name = "cards"
 
     if folder_name in listdir(getcwd()):
         return folder_name
@@ -56,8 +56,19 @@ def dir_for_char() -> str:
         return folder_name
 
 
+def path_preparing(slash_in_path):
+    if name == "nt":
+        return slash_in_path
+    else:
+        correct_path = slash_in_path.replace("\\", '/')
+        return path.join(correct_path)
+
+
 if __name__ == "__main__":
     for numb in range(1, 11):
-        render_template(template_path=r'cart_template\charsheet.svg',
-                        output_path=fr"{dir_for_char()}\charsheet{numb}.svg",
-                        context=fill_char_form())
+        render_template(
+            template_path=path_preparing(r"card_template\charsheet.svg"),
+            output_path=path_preparing(
+                fr"{dir_for_cards()}\charsheet{numb}.svg"
+                ),
+            context=fill_char_form())
