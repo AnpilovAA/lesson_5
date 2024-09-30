@@ -20,7 +20,9 @@ def fill_char_form():
 
     fake_name = faker_male.split(" ")
     city = faker_city.split(",")
-    name, last_name, _ = fake_name
+    
+    name = fake_name[0]
+    last_name = fake_name[1]
 
     beauty_letter = decorate_letter()
     sampled_skills = sample(beauty_letter, len(beauty_letter))
