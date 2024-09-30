@@ -1,15 +1,23 @@
-from os import listdir, makedirs, getcwd, path, name
-from random import randint, choice, sample
+from os import makedirs, path
+from random import randint, sample
 
 
 from file_operations import render_template
+from faker import Faker
 
 
-from fake_data import faker_male, faker_city, faker_job
 from char_skills import SKILLS, beautiful_letters
 
 
+FAKE_DATA = Faker("ru_RU")
+
+
 def fill_char_form():
+
+    faker_male = FAKE_DATA.name_male()
+    faker_city = FAKE_DATA.address()
+    faker_job = FAKE_DATA.job()
+
     fake_name = faker_male.split(" ")
     city = faker_city.split(",")
     name, last_name, _ = fake_name
@@ -45,14 +53,6 @@ def decorate_letter():
 
         skills_with_beauty_letter.append(new_skill)
     return skills_with_beauty_letter
-
-
-def path_preparing(slash_in_path):
-    if name == "nt":
-        return slash_in_path
-    else:
-        correct_path = slash_in_path.replace("\\", '/')
-        return path.join(correct_path)
 
 
 if __name__ == "__main__":
