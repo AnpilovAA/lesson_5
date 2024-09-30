@@ -26,9 +26,9 @@ def fill_char_form():
         "endurance": randint(1, 18),
         "intelligence": randint(1, 18),
         "luck": randint(1, 18),
-        "skill_1": choice(sampled_skills),
-        "skill_2": choice(sampled_skills),
-        "skill_3": choice(sampled_skills),
+        "skill_1": sampled_skills[0],
+        "skill_2": sampled_skills[1],
+        "skill_3": sampled_skills[3],
     }
 
     return context
@@ -56,7 +56,7 @@ def path_preparing(slash_in_path):
 
 
 if __name__ == "__main__":
-    makedirs("cards")
+    makedirs("cards", exist_ok=True)
     for numb in range(1, 11):
         render_template(
             template_path=path.join("card_template", "charsheet.svg"),
