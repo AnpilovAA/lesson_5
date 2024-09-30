@@ -30,6 +30,7 @@ def fill_char_form():
         "skill_2": choice(sampled_skills),
         "skill_3": choice(sampled_skills),
     }
+
     return context
 
 
@@ -46,16 +47,6 @@ def decorate_letter():
     return skills_with_beauty_letter
 
 
-def dir_for_cards() -> str:
-    folder_name = "cards"
-
-    if folder_name in listdir(getcwd()):
-        return folder_name
-    else:
-        makedirs(folder_name)
-        return folder_name
-
-
 def path_preparing(slash_in_path):
     if name == "nt":
         return slash_in_path
@@ -65,10 +56,11 @@ def path_preparing(slash_in_path):
 
 
 if __name__ == "__main__":
+    makedirs("cards")
     for numb in range(1, 11):
         render_template(
-            template_path=path_preparing(r"card_template\charsheet.svg"),
-            output_path=path_preparing(
-                fr"{dir_for_cards()}\charsheet{numb}.svg"
+            template_path=path.join("card_template", "charsheet.svg"),
+            output_path=path.join(
+                "cards", f"charsheet{numb}.svg"
                 ),
             context=fill_char_form())
